@@ -28,11 +28,11 @@ output "backup_report_plans_region" {
 }
 output "backup_report_plans_report_delivery_channel" {
   description = "Map of report_delivery_channel values across all backup_report_plans, keyed the same as var.backup_report_plans"
-  value       = { for k, v in aws_backup_report_plan.backup_report_plans : k => v.report_delivery_channel if v.report_delivery_channel != null && length(v.report_delivery_channel) > 0 }
+  value       = { for k, v in aws_backup_report_plan.backup_report_plans : k => one(v.report_delivery_channel) if v.report_delivery_channel != null && length(v.report_delivery_channel) > 0 }
 }
 output "backup_report_plans_report_setting" {
   description = "Map of report_setting values across all backup_report_plans, keyed the same as var.backup_report_plans"
-  value       = { for k, v in aws_backup_report_plan.backup_report_plans : k => v.report_setting if v.report_setting != null && length(v.report_setting) > 0 }
+  value       = { for k, v in aws_backup_report_plan.backup_report_plans : k => one(v.report_setting) if v.report_setting != null && length(v.report_setting) > 0 }
 }
 output "backup_report_plans_tags" {
   description = "Map of tags values across all backup_report_plans, keyed the same as var.backup_report_plans"
